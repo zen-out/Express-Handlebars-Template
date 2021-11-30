@@ -1,10 +1,12 @@
+
 # Express handlebars template
+
 
 - Cheatsheet for all things that are important
 
-## Will be able to see how to utilize knex queries
+## Outline
 
-- Join 
+![Outline](https://www.dropbox.com/s/ds6qa659u22ujn1/Screenshot%202021-12-01%20at%204.52.27%20AM.png?raw=1)
 
 ## Will be able to see how to quickly utilize 
 
