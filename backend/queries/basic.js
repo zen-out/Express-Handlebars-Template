@@ -1,7 +1,3 @@
-const TABLE_NAME = "features";
-// this should correspond to redux actions
-const className = `${TABLE_NAME}Queries`
-
 class Query {
     constructor(TABLE_NAME, knex) {
         this.knex = knex;
