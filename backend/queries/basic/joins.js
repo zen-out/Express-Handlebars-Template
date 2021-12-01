@@ -49,13 +49,11 @@ class JoinQuery {
         this.parentUserId = `${PARENT_TABLE}.user_id`
         this.parentClause = `${PARENT_TABLE}.id`
         this.childClause = `${CHILD_TABLE}.${formatChildSuffix}`
-        console.log(this.parentClause, "parent", this.childClause)
         this.knex = knex
     }
     // 
     innerJoin(...conditions) {
-        console.log(this.parentClause, this.childClause)
-        return connection.select(...conditions).from(this.PARENT_TABLE).innerJoin(this.CHILD_TABLE, this.parentClause, this.childClause).where(this.parentUserId, 1).then((result) => {
+        return connection.select(...conditions).from(this.CHILD_TABLE).innerJoin(this.PARENT_TABLE, this.parentClause, this.childClause).where(this.parentUserId, 1).then((result) => {
             return result;
         })
     }
@@ -63,5 +61,6 @@ class JoinQuery {
 
 }
 
-let jq = new JoinQuery(5, "problems", "tasks", connection)
-readQuery(jq.innerJoin(["task"]))
+module.exports = {
+    JoinQuery
+}

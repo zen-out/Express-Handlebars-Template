@@ -2,18 +2,12 @@ const {
     connection
 } = require("../../database/index")
 const {
-    Query
-} = require("./basic")
-const {
     JoinQuery
 } = require("./joins")
 const {
     formatTableName,
     formatParentChildNames
-} = require("../utils/format")
-const {
-    readQuery
-} = require("../utils/readQuery")
+} = require("../utils/format");
 test("remove plural should format name", () => {
     let final = formatTableName("problems")
     expect(final).toBe("problem_id");
@@ -24,14 +18,15 @@ test("given users, problems, should return users.id, problems.user_id", () => {
 
 })
 describe("join queries", () => {
+    let test = new JoinQuery(19, "projects", "features", connection)
     it("should be able to run a inner join query, accepting array as param", () => {
-        let test = new JoinQuery(1, "problems", "tasks", connection)
-        let getQuery = test.innerJoin(1, ["task"])
+        test.innerJoin(["title"]).then((result) => {
+            expect(result[0]).toHaveProperty("title")
+        })
     })
 
-    // 
-
     it("if child is an array, then would be pushed into the parent", () => {
+
 
     })
     // what would be bad if broken?
