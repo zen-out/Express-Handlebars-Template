@@ -4,10 +4,20 @@ const {
 const {
     Query
 } = require("./basic")
-const {
-    testQuery,
-    random
-} = require("../utils/queryTools")
+var mockDb = require('mock-knex');
+var connection = knex({
+    client: 'postgresql',
+    connection: {
+        database: "optee",
+        user: "postgres",
+        password: "postgres",
+    },
+    migrations: {
+        directory: "../../database/migrations",
+    },
+});
+
+mockDb.mock(db);
 
 let objectToAdd = {
     user_id: 19,

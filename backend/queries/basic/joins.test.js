@@ -46,10 +46,11 @@ describe("join queries", () => {
     })
 
     // e.g., number of completed tasks for problem
-    it("returns accurate count of parent", () => {})
+    it("returns accurate count of child", () => {})
 
 
     // e.g., rendering feature accordian 
+    // will return tasks, ordered by features
     it("formats the parent and child accordingly", () => {
 
     })

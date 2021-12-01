@@ -10,81 +10,27 @@ function testQuery(q) {
     })
 }
 let random = Math.floor(Math.random() * 1000000);
-let tableValues = {
-    users: {
-        gmail_id: '',
-        facebook_id: '',
-        linkedin_id: '',
-        spotify_id: '',
-        name: '',
-        email: '',
-        hash: '',
-    },
-    projects: {
-        user_id: '',
-        name: '',
-        importance: '',
-        image_url: '',
-        color: '',
-        purpose: '',
-        friendOneEmail: '',
-        friendTwoEmail: '',
-        deadline: '',
-        status: '',
-    },
-    features: {
-        user_id: '',
-        project_id: '',
-        title: '',
-        keyInfo: '',
-        tools: '',
-        description: '',
-        notes: '',
-        structure: '',
-        start: '',
-        end: '',
-        status: '',
-        created: '',
-    },
-    problems: {
-        user_id: '',
-        project_id: '',
-        feature_id: '',
-        problem: '',
-        whatshouldbe: '',
-        whatactuallyis: '',
-        hypothesis: '',
-        plan: '',
-        status: '',
-        created: '',
-    },
-    tasks: {
-        user_id: '',
-        project_id: '',
-        feature_id: '',
-        problem_id: '',
-        task: '',
-        done: '',
-        start: '',
-        end: '',
-        status: '',
-    },
-    timer: {
-        user_id: '',
-        project_id: '',
-        task_id: '',
-        feature_id: '',
-        problem_id: '',
-        days: '',
-        hours: '',
-        minutes: '',
-        seconds: '',
-        created: '',
-    },
-};
+/**
+ * getFormattedColumns("projects")
+ * @date 2021-12-01
+ * @param {string} TABLE_NAME
+ * @returns {array} of strings with each column
+ */
+async function getFormattedColumns(TABLE_NAME) {
+    let columns = await connection(TABLE_NAME).columnInfo()
+    let keys = Object.keys(columns)
+    let arr = []
+    let formatted = keys.forEach((key) => {
+        let format = `${TABLE_NAME}.${key}`
+        console.log(format)
+
+        arr.push(format)
+    })
+    return arr;
+}
 
 module.exports = {
-    tableValues,
+    getFormattedColumns,
     readQuery,
     testQuery,
     random
