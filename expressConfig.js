@@ -14,8 +14,22 @@ const {
 } = require('@handlebars/allow-prototype-access')
 
 var app = express();
+var options = {
+    dotfiles: 'ignore',
+    etag: false,
+    extensions: ['htm', "handlebars", "js", 'html'],
+    index: false,
+    maxAge: '1d',
+    redirect: false,
+    setHeaders: function(res, path, stat) {
+        res.set('x-timestamp', Date.now())
+        res.set("Access-Control-Allow-Origin", '*');
+        res.set('Access-Control-Allow-Headers', "Origin, X-Requested-With, Content-Type, Accept")
+    }
+}
+
 app.use(express.json());
-app.use(express.static('./frontend'));
+app.use(express.static('./frontend', options));
 app.use(express.urlencoded({
     extended: true
 }));
@@ -23,6 +37,8 @@ app.use(cors());
 app.use(logger('dev'));
 app.use(cookieParser());
 app.use(methodOverride('_method'));
+
+
 let expressHandlebars = hbs.create({
     runtimeOptions: {
         allowProtoPropertiesByDefault: true,
