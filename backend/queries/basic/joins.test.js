@@ -8,7 +8,8 @@ const {
     JoinQuery
 } = require("./joins")
 const {
-    formatTableName
+    formatTableName,
+    formatParentChildNames
 } = require("../utils/format")
 const {
     readQuery
@@ -17,20 +18,11 @@ test("remove plural should format name", () => {
     let final = formatTableName("problems")
     expect(final).toBe("problem_id");
 })
-
-function formatParentChildNames(parent, child) {
-    let formatParent = `${parent}.id`
-    let formatChildSuffix = formatTableName(parent)
-    let formatChild = `${child}.${formatChildSuffix}`
-
-    return [formatParent, formatChild]
-}
 test("given users, problems, should return users.id, problems.user_id", () => {
     let res = formatParentChildNames("users", "problems")
     expect(res).toStrictEqual(["users.id", "problems.user_id"]);
 
 })
-
 describe("join queries", () => {
     it("should be able to run a inner join query, accepting array as param", () => {
         let test = new JoinQuery(connect, "problems", "tasks")
@@ -61,13 +53,13 @@ describe("join queries", () => {
 
     })
 
+    // getting latest features, but only with child inside
     it("filter function only applies to parent, child will be grouped inside", () => {
 
     })
 
-    // getting all 
+    // getting all none completed tasks
     it("filter function only applies to child", () => {
 
     })
-
 })

@@ -12,3 +12,6 @@ function readQuery(q) {
 }
 
 let features = new Query("features", connection)
+let users = new Query("users", connection)
+let projects = new Query("projects", connection)
+let tasks = new Query("tasks", connection)

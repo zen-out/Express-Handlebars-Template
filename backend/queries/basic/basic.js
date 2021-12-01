@@ -1,3 +1,9 @@
+const {
+    connection
+} = require("../../database/index")
+const {
+    readQuery
+} = require('../utils/queryTools')
 class Query {
     constructor(TABLE_NAME, knex) {
         this.TABLE_NAME = TABLE_NAME
@@ -16,6 +22,18 @@ class Query {
             .catch((error) => {
                 console.log(error)
             })
+    }
+    /**
+     * search(fakeProblemTitle, fake)
+     * @param {any} search
+     * @param {any} keyword
+     * @returns {any}
+     */
+    search(search, keyword) {
+        return this.knex(this.TABLE_NAME).select("*").where(search, "like", `%${keyword}%`).then((result) => {
+            // console.log("any search results", result)
+            return result;
+        })
     }
     /**
      * getDescData("title")
@@ -184,7 +202,7 @@ class Query {
                 return id
             })
             .catch((error) => {
-                console.log("error", error);
+                return id
             });
     }
 }
@@ -192,35 +210,3 @@ class Query {
 module.exports = {
     Query
 };
-
-
-// const {
-// connection
-// } = require("../database/index")
-// const {
-//     Query
-// } = require("./basic/features")
-
-// function readQuery(q) {
-//     return q.then((result) => {
-//         console.log(result)
-//     })
-// }
-
-// let features = new Query("features", connection)
-// let getDescData = features.getAscData("title")
-// let id = features.exists("notes", "generate Sleek Grass-roots context-sensitive product")
-// let post = features.post({
-//     id: 19,
-//     user_id: 19,
-//     project_id: 19,
-//     title: 'expedite Realigned human-resource projection',
-//     status: 'doing',
-//     keyInfo: 'Balanced disintermediate toolset impactful Soft',
-//     tools: 'Table Cheese Fresh',
-//     description: 'De-engineered cohesive flexibility frictionless Fresh',
-//     notes: 'generate Sleek Grass-roots context-sensitive product',
-//     structure: 'e-enable Frozen'
-// })
-// let deleteQ = features.delete(21)
-// readQuery(deleteQ)

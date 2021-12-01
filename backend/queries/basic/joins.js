@@ -20,20 +20,14 @@ let timer = new Query("timer", connection)
 
 // Use Case One 
 
-let random = Math.random() * 50;
+let random = Math.floor(Math.random() * 1000000);
 // create new user, and have no initial problems
-// let createNewUser = users.post({
-//     name: "lesley",
-//     email: "Hattie.Zulauf32@example.org",
-//     hash: "whatsup"
-// })
+let createNewUser = users.post({
+    name: "lesley",
+    email: `Hattie.${random}@example.org`,
+    hash: "whatsup"
+})
 // should return 0 
-function userProblems(...conditions) {
-    return connection.select(...conditions).from("problems").innerJoin("users", "problems.user_id", "users.id").then((array) => {
-        return array
-    });
-};
-
 class JoinQuery {
     // parent, child 
     // users, problems
@@ -49,7 +43,7 @@ class JoinQuery {
         this.knex = knex
     }
     // 
-    innerJoin(id, ...conditions) {
+    innerJoin(...conditions) {
         console.log(this.parentClause, this.childClause)
         return connection.select(...conditions).from(this.PARENT_TABLE).innerJoin(this.CHILD_TABLE, this.parentClause, this.childClause).then((array) => {
             return array
