@@ -9,7 +9,7 @@ const {
 } = require("../utils/format")
 const {
     readQuery
-} = require("../utils/readQuery")
+} = require("../utils/queryTools")
 
 let problems = new Query("problems", connection)
 let features = new Query("features", connection)
@@ -28,15 +28,25 @@ let createNewUser = users.post({
     hash: "whatsup"
 })
 // should return 0 
+
+function formatPlural(string) {
+    if (string.endsWith("s")) {
+        return string.slice(0, -1)
+    }
+    return string;
+}
 class JoinQuery {
     // parent, child 
     // users, problems
     // users.id
     // problems.user_id
-    constructor(knex, PARENT_TABLE, CHILD_TABLE) {
+    constructor(userId, PARENT_TABLE, CHILD_TABLE, knex) {
+        this.userId = userId
         this.PARENT_TABLE = PARENT_TABLE
         this.CHILD_TABLE = CHILD_TABLE
         let formatChildSuffix = formatTableName(PARENT_TABLE)
+        this.userId = userId;
+        this.parentUserId = `${PARENT_TABLE}.user_id`
         this.parentClause = `${PARENT_TABLE}.id`
         this.childClause = `${CHILD_TABLE}.${formatChildSuffix}`
         console.log(this.parentClause, "parent", this.childClause)
@@ -45,12 +55,13 @@ class JoinQuery {
     // 
     innerJoin(...conditions) {
         console.log(this.parentClause, this.childClause)
-        return connection.select(...conditions).from(this.PARENT_TABLE).innerJoin(this.CHILD_TABLE, this.parentClause, this.childClause).then((array) => {
-            return array
-        });
+        return connection.select(...conditions).from(this.PARENT_TABLE).innerJoin(this.CHILD_TABLE, this.parentClause, this.childClause).where(this.parentUserId, 1).then((result) => {
+            return result;
+        })
     }
+
 
 }
 
-let jq = new JoinQuery(connection, "problems", "tasks")
-readQuery(jq.innerJoin(1, ["task"]))
+let jq = new JoinQuery(5, "problems", "tasks", connection)
+readQuery(jq.innerJoin(["task"]))

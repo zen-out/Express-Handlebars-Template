@@ -25,8 +25,14 @@ test("given users, problems, should return users.id, problems.user_id", () => {
 })
 describe("join queries", () => {
     it("should be able to run a inner join query, accepting array as param", () => {
-        let test = new JoinQuery(connect, "problems", "tasks")
+        let test = new JoinQuery(1, "problems", "tasks", connection)
         let getQuery = test.innerJoin(1, ["task"])
+    })
+
+    // 
+
+    it("if child is an array, then would be pushed into the parent", () => {
+
     })
     // what would be bad if broken?
     it("deleting parent means deleting the child", () => {
