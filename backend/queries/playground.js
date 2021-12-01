@@ -81,15 +81,28 @@ function getChildColumns() {
 let parentCols = getParentColumns()
 let childCols = getChildColumns()
 // get all problems if hourglass is difficult
-function getChildByParentCondition() {
-    return connection(CHILD).select("*").join(PARENT, function() {
-        return this.on(childsParentId, "=", parentId).onIn("hourglass.difficulty", ["low"])
+/**
+ * getChildByParentCondition("parent.condition", ["value"], ["child.col", "child.col"])
+ getChildByParentCondition("hourglass.difficulty", ["low"], ["problem.problem", "problem.whatshouldbe"])
+ * @date 2021-12-02
+ * @returns {any}
+ */
+function getChildByParentCondition(condition, value, childCols = "*") {
+    return connection(CHILD).select(childCols).join(PARENT, function() {
+        return this.on(childsParentId, "=", parentId).onIn(condition, value)
     })
 }
 
-getChildByParentCondition().then((array) => {
-    console.log(array)
-})
+// getChildByParentCondition("hourglass.difficulty", ["low"], ["problem.problem", "problem.whatshouldbe"]).then((array) => {
+//     console.log(array)
+// })
+
+// try to see if you can get users where hourglass difficulty is medium
+
+function getParentByChildCondition() {
+    return connection()
+
+}
 
 
 // return connection.select("features.user_id", 'project_id', 'title', 'keyInfo', 'tools', 'description', 'notes', 'structure', 'start', 'end', 'status', 'created').from("features").innerJoin("projects", "features.project_id", "projects.id").where("projects.id", 19).then((result) => {

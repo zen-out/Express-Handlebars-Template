@@ -17,7 +17,7 @@ app.use(cors());
 app.use(logger('dev'));
 app.use(cookieParser());
 app.use(methodOverride('_method'));
-
+app.use("/", require("./frontend/model/api/features"))
 
 function fViews(path) {
     return `${__dirname}/frontend/${path}`;

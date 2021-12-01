@@ -67,7 +67,6 @@ class JoinQuery {
         })
     }
     // get all tasks if problem is done
-    // get all tasks if 
     getNumberOfChildrenByParentCondition(parentId, parentCondition) {
 
 

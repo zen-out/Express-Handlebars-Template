@@ -2,6 +2,7 @@
 const {
     app
 } = require('./expressConfig');
+app.use("/", require("./frontend/model/api/features"))
 
 app.get("/", function(req, res) {
     res.render("layouts/dashboard", {

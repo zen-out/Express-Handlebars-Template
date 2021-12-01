@@ -9,10 +9,10 @@ module.exports = {
             password: "postgres",
         },
         migrations: {
-            directory: __dirname + "/migrations",
+            directory: __dirname + "/backend/database/migrations",
         },
         seeds: {
-            directory: __dirname + "/seeds",
+            directory: __dirname + "/backend/database/seeds",
         },
     },
     production: {
@@ -25,9 +25,6 @@ module.exports = {
         pool: {
             min: 2,
             max: 10,
-        },
-        migrations: {
-            directory: __dirname + "/backend/migrations",
         },
     },
 };
