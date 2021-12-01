@@ -1,5 +1,6 @@
 class Query {
     constructor(TABLE_NAME, knex) {
+        this.TABLE_NAME = TABLE_NAME
         this.knex = knex;
     }
     /**
@@ -9,7 +10,7 @@ class Query {
      * @returns {array}
      */
     getByMostRecent() {
-        return this.knex(TABLE_NAME).select("*").orderBy("created", "desc", "first").then((array) => {
+        return this.knex(this.TABLE_NAME).select("*").orderBy("created", "desc", "first").then((array) => {
                 return array
             })
             .catch((error) => {
@@ -23,7 +24,7 @@ class Query {
      * @returns {array}
      */
     getDescData(condition) {
-        return this.knex(TABLE_NAME)
+        return this.knex(this.TABLE_NAME)
             .select("*")
             .orderBy(condition, "desc", "first").then((result) => {
                 return result
@@ -39,7 +40,7 @@ class Query {
      * @returns {array}
      */
     getAscData(condition) {
-        return this.knex(TABLE_NAME)
+        return this.knex(this.TABLE_NAME)
             .select("*")
             .orderBy(condition, "asc", "first").then((result) => {
                 return result
@@ -55,7 +56,7 @@ class Query {
      * @returns {object} of one object
      */
     getById(id) {
-        return this.knex(TABLE_NAME)
+        return this.knex(this.TABLE_NAME)
             .select("*")
             .where({
                 id: id
@@ -71,7 +72,7 @@ class Query {
      * @returns {array}
      */
     getAll() {
-        return this.knex(TABLE_NAME)
+        return this.knex(this.TABLE_NAME)
             .select("*")
             .then((eachRow) => {
                 return eachRow;
@@ -88,7 +89,7 @@ class Query {
      * @returns {array}
      */
     getByCondition(column, value) {
-        return this.knex(TABLE_NAME)
+        return this.knex(this.TABLE_NAME)
             .select("*")
             .where(
                 column, value
@@ -110,7 +111,7 @@ class Query {
      * @returns {boolean}
      */
     exists(column, value) {
-        return this.knex(TABLE_NAME).count("id as n").where(column, value).then(count => {
+        return this.knex(this.TABLE_NAME).count("id as n").where(column, value).then(count => {
             let num = parseInt(count[0].n)
             return num > 0
         })
@@ -118,7 +119,7 @@ class Query {
 
 
     safePost(object) {
-        return this.knex(TABLE_NAME)
+        return this.knex(this.TABLE_NAME)
             .returning("id")
             .insert(object)
             .then((id) => {
@@ -154,7 +155,7 @@ class Query {
      * @returns {object} edited object
      */
     safeEdit(id, object) {
-        return this.knex(TABLE_NAME)
+        return this.knex(this.TABLE_NAME)
             .update(object)
             .where({
                 id: id
@@ -174,7 +175,7 @@ class Query {
      * @returns {integer} id
      */
     delete(id) {
-        return this.knex(TABLE_NAME)
+        return this.knex(this.TABLE_NAME)
             .where({
                 id: id
             })
@@ -191,3 +192,35 @@ class Query {
 module.exports = {
     Query
 };
+
+
+// const {
+// connection
+// } = require("../database/index")
+// const {
+//     Query
+// } = require("./basic/features")
+
+// function readQuery(q) {
+//     return q.then((result) => {
+//         console.log(result)
+//     })
+// }
+
+// let features = new Query("features", connection)
+// let getDescData = features.getAscData("title")
+// let id = features.exists("notes", "generate Sleek Grass-roots context-sensitive product")
+// let post = features.post({
+//     id: 19,
+//     user_id: 19,
+//     project_id: 19,
+//     title: 'expedite Realigned human-resource projection',
+//     status: 'doing',
+//     keyInfo: 'Balanced disintermediate toolset impactful Soft',
+//     tools: 'Table Cheese Fresh',
+//     description: 'De-engineered cohesive flexibility frictionless Fresh',
+//     notes: 'generate Sleek Grass-roots context-sensitive product',
+//     structure: 'e-enable Frozen'
+// })
+// let deleteQ = features.delete(21)
+// readQuery(deleteQ)
