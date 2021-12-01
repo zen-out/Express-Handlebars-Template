@@ -17,15 +17,23 @@ const {
 
 
 let GRANDPARENT = "user"
-let PARENT = "hourglass"
-let CHILD = "problem"
+let HOURGLASS = "hourglass"
+let PARENT = "problem"
+let CHILD = "task"
 
 // user.id
 let grandParentId = `${GRANDPARENT}.id`
+let hourglassId = "hourglass.id"
+
+let parentHourglass = `${PARENT}.hourglass_id`
+let childHourglass = `${CHILD}.hourglass_id`
+
 // hourglass.id
 let parentId = `${PARENT}.id`
 // problem.id
 let childId = `${CHILD}.id`
+
+
 
 // problem.hourglass_id
 let childsParentId = `${CHILD}.${PARENT}_id`
@@ -97,12 +105,70 @@ function getChildByParentCondition(condition, value, childCols = "*") {
 //     console.log(array)
 // })
 
+
+
 // try to see if you can get users where hourglass difficulty is medium
 
-function getParentByChildCondition() {
-    return connection()
+// try to see if you can get problems if tag is postgres
+
+
+/**
+ * getParentByChildCondition(condition, value, childCols = "*")
+ getParentByChildCondition("tag_snippet.tag", "postgres", ["problem.problem", "problem.whatshouldbe", "problem.plan"]).then((object) => {
+     console.log(object)
+ })
+ * @date 2021-12-02
+ * @returns {array} of objects specified in childcols
+ */
+function getParentByChildCondition(condition, value, childCols = "*") {
+    return connection(PARENT).select(childCols).join(CHILD, function() {
+        return this.on(childsParentId, "=", parentId).onIn(condition, value)
+    })
 
 }
+// getParentByChildCondition("tag_snippet.tag", "postgres", ["problem.problem", "problem.whatshouldbe", "problem.plan"]).then((object) => {
+//     console.log(object)
+// })
+
+// get [array of children], nested into parent, where [parent condition]
+// get tasks where current problems are not done 
+// get tags where projects are not yet complete
+async function getHourClassCondition() {
+    let hourglassCondition = await connection(HOURGLASS).pluck("status")
+    console.log(hourglassCondition)
+}
+
+
+/**
+ * orderAndGroupHourglass(order, group, values)
+ (difficulty, importance, ["difficulty", "importance"])
+ * @date 2021-12-02
+ * @param {string} order difficulty
+ * @param {string} partition importance
+ * @param {any} values="*"
+ * @returns {any}
+ { difficulty: 1, importance: 1, rank: '1' }, 
+ { difficulty: 1, importance: 1, rank: '1' }, 
+ { difficulty: 2, importance: 1, rank: '2' }, 
+ { difficulty: 2, importance: 1, rank: '2' }, 
+ { difficulty: 3, importance: 1, rank: '3' }, 
+ { difficulty: 3, importance: 1, rank: '3' }, 
+ { difficulty: 1, importance: 2, rank: '1' },
+ */
+// e.g., lets say that we want to get the most importance tasks, ranked by difficulty
+// or lets say the most important tasks, ranked by due date 
+// this is quite fun
+function orderAndGroupHourglass(order, group, values = "*") {
+    return connection("hourglass").select(values).denseRank("rank", function() {
+        // so it's like ordering the data by status
+        // by each group of status will have be grouped by importance
+        this.orderBy(order).partitionBy(group)
+    })
+}
+orderAndGroupHourglass("difficulty", "importance", ["difficulty", "importance"]).then((object) => {
+    console.log(object)
+})
+// [ { status: '0', importance: '1', rank: '1' }, { status: '1', importance: '1', rank: '2' }, { status: 'done', importance: '1', rank: '3' }, { status: 'done', importance: '1', rank: '3' }, { status: 'to do', importance: '1', rank: '4' }, { status: '2', importance: '2', rank: '1' }, { status: '2', importance: '2', rank: '1' }, { status: '2', importance: '2', rank: '1' }, 
 
 
 // return connection.select("features.user_id", 'project_id', 'title', 'keyInfo', 'tools', 'description', 'notes', 'structure', 'start', 'end', 'status', 'created').from("features").innerJoin("projects", "features.project_id", "projects.id").where("projects.id", 19).then((result) => {
