@@ -3,7 +3,7 @@
 
 const {
     query
-} = require("../index.js")
+} = require("../../model/index.js")
 const {
     exposeTemplates,
     expressHandlebars
