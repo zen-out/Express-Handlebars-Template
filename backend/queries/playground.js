@@ -16,6 +16,7 @@ const {
 } = require("./utils/format")
 
 
+
 let GRANDPARENT = "user"
 let HOURGLASS = "hourglass"
 let PARENT = "problem"
@@ -165,7 +166,62 @@ function orderAndGroupHourglass(order, group, values = "*") {
         this.orderBy(order).partitionBy(group)
     })
 }
-orderAndGroupHourglass("difficulty", "importance", ["difficulty", "importance"]).then((object) => {
+// orderAndGroupHourglass("difficulty", "importance", ["difficulty", "importance"]).then((array) => {
+//     return array
+// })
+
+function grabByDate() {
+    return connection("hourglass").select("*").rowNumber("row", ["importance", "difficulty"], ["end"])
+}
+
+grabByDate().then((array) => {
+    console.log(array)
+})
+
+
+
+// TO DO for the basic - if there is a merge conflict, merge just the things you want (by grabbing the column names lolol removing created at and )
+// function updateButIfDoesntExist() {
+// knex('tableName')
+//     .insert({
+//         email: "ignore@example.com",
+//         name: "John Doe",
+//         created_at: timestamp,
+//         updated_at: timestamp,
+//     })
+//     .onConflict('email')
+//     .merge({
+//         name: "John Doe",
+//         updated_at: timestamp,
+//     })
+//     .where('updated_at', '<', timestamp)
+// }
+
+
+async function getTasksAndProblemsWithHourglass() {
+    let ordered = await orderAndGroupHourglass("difficulty",
+        "importance ", [
+            "id", "difficulty", "importance"
+        ]).then((array) => {
+        return array
+    })
+    let finalArr = []
+    for (let i = 0; i < ordered.length; i++) {
+        let eachProblem = await connection("problem").select("problem.id as og_id", "problem").join("hourglass", function() {
+            this.on("hourglass.id", "=", "problem.hourglass_id")
+        }).select(["task", "task.id as taskId",
+            "task.problem_id"
+        ]).join("task", function() {
+            this.on("problem.id", "=", "task.problem_id")
+        }).rowNumber("row", ["problem.id"])
+        finalArr.push(eachProblem)
+
+    }
+    return finalArr
+
+}
+
+getTasksAndProblemsWithHourglass().then((object) => {
     console.log(object)
 })
 // [ { status: '0', importance: '1', rank: '1' }, { status: '1', importance: '1', rank: '2' }, { status: 'done', importance: '1', rank: '3' }, { status: 'done', importance: '1', rank: '3' }, { status: 'to do', importance: '1', rank: '4' }, { status: '2', importance: '2', rank: '1' }, { status: '2', importance: '2', rank: '1' }, { status: '2', importance: '2', rank: '1' }, 

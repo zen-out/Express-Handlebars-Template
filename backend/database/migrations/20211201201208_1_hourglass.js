@@ -2,12 +2,11 @@ exports.up = function(knex) {
     return knex.schema.createTable("hourglass", (table) => {
         table.increments("id").primary();
         table.integer("user_id").unsigned().references("user.id").onUpdate("CASCADE").onDelete("CASCADE")
-
         table.string("email");
         table.boolean("public")
         table.string("status");
-        table.string("importance");
-        table.string("difficulty");
+        table.integer("importance");
+        table.integer("difficulty");
         table.timestamp("start");
         table.timestamp("edit");
         table.timestamp("end");

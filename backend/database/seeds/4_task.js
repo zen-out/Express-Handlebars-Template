@@ -11,45 +11,45 @@ exports.seed = function(knex) {
                     name: 'expedite Generic Fundamental heuristic methodology Front-line clear-thinking challenge'
                 },
                 {
-                    user_id: 2,
+                    user_id: 1,
                     hourglass_id: 2,
                     cheatsheet_id: 2,
-                    problem_id: 2,
+                    problem_id: 1,
                     name: 'e-enable Gorgeous Upgradable context-sensitive infrastructure Distributed actuating contingency'
                 },
                 {
-                    user_id: 3,
+                    user_id: 1,
                     hourglass_id: 3,
                     cheatsheet_id: 3,
-                    problem_id: 3,
+                    problem_id: 1,
                     name: 'deploy Unbranded Switchable radical adapter Triple-buffered well-modulated approach'
                 },
                 {
-                    user_id: 4,
+                    user_id: 1,
                     hourglass_id: 4,
                     cheatsheet_id: 4,
-                    problem_id: 4,
+                    problem_id: 1,
                     name: 'transform Refined Total client-server installation Right-sized intangible complexity'
                 },
                 {
-                    user_id: 5,
+                    user_id: 1,
                     hourglass_id: 5,
                     cheatsheet_id: 5,
-                    problem_id: 5,
+                    problem_id: 1,
                     name: 'cultivate Sleek Configurable cohesive Graphical User Interface Synergized scalable attitude'
                 },
                 {
-                    user_id: 6,
+                    user_id: 2,
                     hourglass_id: 6,
                     cheatsheet_id: 6,
-                    problem_id: 6,
+                    problem_id: 2,
                     name: 'integrate Ergonomic Realigned client-driven groupware Multi-tiered impactful software'
                 },
                 {
-                    user_id: 7,
+                    user_id: 2,
                     hourglass_id: 7,
                     cheatsheet_id: 7,
-                    problem_id: 7,
+                    problem_id: 2,
                     name: 'streamline Sleek Public-key systematic adapter Synchronised didactic concept'
                 },
                 {

@@ -5,9 +5,28 @@ const {
     readQuery
 } = require('../utils/queryTools')
 class Query {
-    constructor(TABLE_NAME, knex) {
-        this.TABLE_NAME = TABLE_NAME
+    constructor(knex) {
         this.knex = knex;
+    }
+    getByImportanceJoin(table, table2, values = "*") {
+        return this.knex(table).select(values).join("hourglass", function() {
+            this.on("hourglass.id", "=", `${table}.hourglass_id`)
+        }).join("task", function() {
+            this.on(`${table}.id`, "=", `${table2}.${table}_id`).onIn("hourglass.status", ["done"])
+        }).denseRank("rank", function() {
+            this.orderBy("importance").partitionBy("difficulty")
+        }).select(values).then((array) => {
+            return array;
+        })
+    }
+    getByImportance(table, values = "*") {
+        return this.knex(table).select(values).join("hourglass", function() {
+            this.on("hourglass.id", "=", `${table}.hourglass_id`)
+        }).denseRank("rank", function() {
+            this.orderBy("importance").partitionBy("difficulty")
+        }).select(values).then((array) => {
+            return array;
+        })
     }
     /**
      * get by most recent (created)
@@ -15,8 +34,8 @@ class Query {
      * @param {id} id
      * @returns {array}
      */
-    getByMostRecent() {
-        return this.knex(this.TABLE_NAME).select("*").orderBy("created", "desc", "first").then((array) => {
+    getByMostRecent(table) {
+        return this.knex(table).select("*").orderBy("created", "desc", "first").then((array) => {
                 return array
             })
             .catch((error) => {
@@ -30,7 +49,7 @@ class Query {
      * @returns {any}
      */
     search(search, keyword) {
-        return this.knex(this.TABLE_NAME).select("*").where(search, "like", `%${keyword}%`).then((result) => {
+        return this.knex(table).select("*").where(search, "like", `%${keyword}%`).then((result) => {
             // console.log("any search results", result)
             return result;
         })
@@ -41,8 +60,8 @@ class Query {
      * @param {condition} condition
      * @returns {array}
      */
-    getDescData(condition) {
-        return this.knex(this.TABLE_NAME)
+    getDescData(table, condition) {
+        return this.knex(table)
             .select("*")
             .orderBy(condition, "desc", "first").then((result) => {
                 return result
@@ -57,8 +76,8 @@ class Query {
      * @param {string} condition
      * @returns {array}
      */
-    getAscData(condition) {
-        return this.knex(this.TABLE_NAME)
+    getAscData(table, condition) {
+        return this.knex(table)
             .select("*")
             .orderBy(condition, "asc", "first").then((result) => {
                 return result
@@ -73,12 +92,12 @@ class Query {
      * @param {integer} id
      * @returns {object} of one object
      */
-    getById(id) {
-        return this.knex(this.TABLE_NAME)
-            .select("*")
-            .where({
-                id: id
-            }).then((eachRow) => {
+    getById(tablename, id) {
+        return this.knex(tablename)
+            .select("*").join("hourglass", function() {
+                this.on("hourglass.id", "=", `${tablename}.hourglass_id`)
+            })
+            .where(`${tablename}.id`, id).then((eachRow) => {
                 return eachRow[0]
             })
             .catch((error) => {
@@ -86,11 +105,11 @@ class Query {
             });
     }
     /**
-     * getAll()
+     * getAll(table)
      * @returns {array}
      */
-    getAll() {
-        return this.knex(this.TABLE_NAME)
+    getAll(table) {
+        return this.knex(table)
             .select("*")
             .then((eachRow) => {
                 return eachRow;
@@ -106,8 +125,8 @@ class Query {
      * @param {any} value e.g., lesley
      * @returns {array}
      */
-    getByCondition(column, value) {
-        return this.knex(this.TABLE_NAME)
+    getByCondition(table, column, value) {
+        return this.knex(table)
             .select("*")
             .where(
                 column, value
@@ -128,16 +147,16 @@ class Query {
      * @param {any} value
      * @returns {boolean}
      */
-    exists(column, value) {
-        return this.knex(this.TABLE_NAME).count("id as n").where(column, value).then(count => {
+    exists(table, column, value) {
+        return this.knex(table).count("id as n").where(column, value).then(count => {
             let num = parseInt(count[0].n)
             return num > 0
         })
     }
 
 
-    safePost(object) {
-        return this.knex(this.TABLE_NAME)
+    safePost(table, object) {
+        return this.knex(table)
             .returning("id")
             .insert(object)
             .then((id) => {
@@ -172,8 +191,8 @@ class Query {
      * @param {object} object
      * @returns {object} edited object
      */
-    safeEdit(id, object) {
-        return this.knex(this.TABLE_NAME)
+    safeEdit(table, id, object) {
+        return this.knex(table)
             .update(object)
             .where({
                 id: id
@@ -192,8 +211,8 @@ class Query {
      * @param {integer} id
      * @returns {integer} id
      */
-    delete(id) {
-        return this.knex(this.TABLE_NAME)
+    delete(table, id) {
+        return this.knex(table)
             .where({
                 id: id
             })

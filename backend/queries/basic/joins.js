@@ -71,7 +71,7 @@ class JoinQuery {
 
 
     }
-    // get users where projects are not yet complete
+    // get cheatsheets where projects are not yet complete
     // get problems where tasks 
     getNumberOfParentsByChildCondition(childId, childCondition) {
 

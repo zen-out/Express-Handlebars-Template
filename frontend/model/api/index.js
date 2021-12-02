@@ -1,6 +1,6 @@
 const {
     features
-} = require("./basic/features")
+} = require("./features")
 
 module.exports = {
     features

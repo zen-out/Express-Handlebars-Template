@@ -5,8 +5,8 @@ exports.seed = function(knex) {
             // Inserts seed entries
             return knex('hourglass').insert([{
                     user_id: 1,
-                    importance: "medium",
-                    difficulty: "low",
+                    importance: 1,
+                    difficulty: 1,
                     edit: new Date(),
                     start: new Date(
                         "Mon Aug 09 2021 01:14:33 GMT+0800 (Hong Kong Standard Time)"
@@ -18,8 +18,8 @@ exports.seed = function(knex) {
                 },
                 {
                     user_id: 2,
-                    importance: "medium",
-                    difficulty: "high",
+                    importance: 1,
+                    difficulty: 2,
                     edit: new Date(),
                     start: new Date(
                         "Sun Apr 18 2021 11:36:44 GMT+0800 (Hong Kong Standard Time)"
@@ -31,8 +31,8 @@ exports.seed = function(knex) {
                 },
                 {
                     user_id: 3,
-                    importance: "medium",
-                    difficulty: "high",
+                    importance: 1,
+                    difficulty: 3,
 
                     edit: new Date(),
                     start: new Date(
@@ -46,8 +46,8 @@ exports.seed = function(knex) {
                 {
                     user_id: 4,
 
-                    importance: "medium",
-                    difficulty: "high",
+                    importance: 2,
+                    difficulty: 1,
                     edit: new Date(),
                     start: new Date(
                         "Tue Jun 01 2021 05:00:53 GMT+0800 (Hong Kong Standard Time)"
@@ -60,8 +60,8 @@ exports.seed = function(knex) {
                 {
                     user_id: 5,
 
-                    importance: "medium",
-                    difficulty: "high",
+                    importance: 2,
+                    difficulty: 2,
                     edit: new Date(),
                     start: new Date(
                         "Sat Jan 09 2021 22:47:08 GMT+0800 (Hong Kong Standard Time)"
@@ -74,8 +74,8 @@ exports.seed = function(knex) {
                 {
                     user_id: 6,
 
-                    importance: "medium",
-                    difficulty: "high",
+                    importance: 2,
+                    difficulty: 3,
                     edit: new Date(),
                     start: new Date(
                         "Thu Jul 01 2021 19:07:31 GMT+0800 (Hong Kong Standard Time)"
@@ -88,8 +88,8 @@ exports.seed = function(knex) {
                 {
                     user_id: 7,
 
-                    importance: "medium",
-                    difficulty: "high",
+                    importance: 3,
+                    difficulty: 1,
                     edit: new Date(),
                     start: new Date(
                         "Sat Jul 03 2021 19:38:13 GMT+0800 (Hong Kong Standard Time)"
@@ -102,8 +102,8 @@ exports.seed = function(knex) {
                 {
                     user_id: 8,
 
-                    importance: "medium",
-                    difficulty: "high",
+                    importance: 3,
+                    difficulty: 2,
                     edit: new Date(),
                     start: new Date(
                         "Thu Sep 02 2021 23:59:15 GMT+0800 (Hong Kong Standard Time)"
@@ -116,8 +116,8 @@ exports.seed = function(knex) {
                 {
                     user_id: 9,
 
-                    importance: "medium",
-                    difficulty: "high",
+                    importance: 3,
+                    difficulty: 3,
 
                     edit: new Date(),
                     start: new Date(
@@ -131,8 +131,8 @@ exports.seed = function(knex) {
                 {
                     user_id: 10,
 
-                    importance: "medium",
-                    difficulty: "high",
+                    importance: 1,
+                    difficulty: 1,
 
 
                     edit: new Date(),
@@ -147,8 +147,8 @@ exports.seed = function(knex) {
                 {
                     user_id: 11,
 
-                    importance: "medium",
-                    difficulty: "high",
+                    importance: 2,
+                    difficulty: 1,
 
                     edit: new Date(),
                     start: new Date(
@@ -162,8 +162,8 @@ exports.seed = function(knex) {
                 {
                     user_id: 12,
 
-                    importance: "medium",
-                    difficulty: "high",
+                    importance: 3,
+                    difficulty: 1,
 
 
                     edit: new Date(),
@@ -178,8 +178,8 @@ exports.seed = function(knex) {
                 {
                     user_id: 13,
 
-                    importance: "medium",
-                    difficulty: "high",
+                    importance: 1,
+                    difficulty: 2,
 
 
                     edit: new Date(),
@@ -194,8 +194,8 @@ exports.seed = function(knex) {
                 {
                     user_id: 14,
 
-                    importance: "medium",
-                    difficulty: "high",
+                    importance: 2,
+                    difficulty: 2,
 
 
 
@@ -211,8 +211,8 @@ exports.seed = function(knex) {
                 {
                     user_id: 15,
 
-                    importance: "medium",
-                    difficulty: "high",
+                    importance: 3,
+                    difficulty: 2,
 
 
 
@@ -228,8 +228,8 @@ exports.seed = function(knex) {
                 {
                     user_id: 16,
 
-                    importance: "medium",
-                    difficulty: "high",
+                    importance: 1,
+                    difficulty: 3,
 
 
 
@@ -245,8 +245,8 @@ exports.seed = function(knex) {
                 {
                     user_id: 17,
 
-                    importance: "medium",
-                    difficulty: "high",
+                    importance: 2,
+                    difficulty: 3,
 
 
                     edit: new Date(),
@@ -261,8 +261,8 @@ exports.seed = function(knex) {
                 {
                     user_id: 18,
 
-                    importance: "medium",
-                    difficulty: "high",
+                    importance: 3,
+                    difficulty: 3,
 
 
 
@@ -278,8 +278,8 @@ exports.seed = function(knex) {
                 {
                     user_id: 19,
 
-                    importance: "medium",
-                    difficulty: "high",
+                    importance: 2,
+                    difficulty: 2,
 
 
                     edit: new Date(),
