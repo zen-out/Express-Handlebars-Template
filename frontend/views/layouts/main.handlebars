@@ -10,37 +10,31 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js" integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js" integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js" integrity="sha512-RNLkV3d+aLtfcpEyFG8jRbnWHxUqVZozacROI4J2F1sTaDqo1dPQYs01OMi1t1w9Y2FdbSCDSQ2ZVdAC8bzgAg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script>
-        (function() {
-                var revive = Handlebars.template,
-                    templates = Handlebars.templates = Handlebars.templates || {};
-
-                {
-                    {
-                        #
-                        templates
-                    }
-                }
-                templates['{{{name}}}'] = revive({
-                    {
-                        {
-                            template
-                        }
-                    }
-                }); {
-                    {
-                        /templates}}
-                    }());
+  
     </script>
+    {{!-- Personal css sheet --}}
     <link rel="stylesheet" type="text/css" href="https://dl.dropbox.com/s/hk7c6wqd8cgm8i4/officialstyles.css" />
+
+    {{!-- My colors! --}}
     <link rel="stylesheet" type="text/css" href="https://dl.dropbox.com/s/m3zladrrj6ffzag/basicStyleAndColors.css" />
+    {{!-- Ness framework --}}
+    <link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+    <link href="https://unpkg.com/nes.css/css/nes.css" rel="stylesheet" />
+
+    <style>
+        html,
+        body,
+        pre,
+        code,
+        kbd,
+        samp {
+            font-family: 'Press Start 2P', cursive;
+        }
+    </style>
 </head>
 
 <body>
-    <h1>yooo!</h1>
-    {{> playground3}}
-    {{> page/main/test}}
-
     {{{body}}}
 </body>
 

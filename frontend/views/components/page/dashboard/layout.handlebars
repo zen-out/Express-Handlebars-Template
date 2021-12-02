@@ -1,0 +1,59 @@
+<link rel="stylesheet" type="text/css" href="/public/styles/pages/dashboard/layout.css" ></link>
+
+    <link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
+<div class="dashboard__page__wrapper dashboard__wrapper">
+  <div class="dashboard__navbar__wrapper"></div>
+  <div class="db_header__content__wrapper">
+    <div class="db_header__wrapper">
+      <div class="db_header__organizer">
+        <h1 class="dashboard__heading">
+          Dashboard
+        </h1>
+        <div class="db_navbar_right">
+          <a href="#">
+          
+<button type="button" class="nes-btn is-warning">Warning</button>
+          </a>
+          <div class="rightnav__wrapper">
+            <div class="db_notification__wrapper">
+              <a href="#" class="db__reg__navbar__notify-2 w-inline-block">
+                <div class="notify__icon-2 w-embed">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-bell"
+                    viewbox="0 0 16 16"
+                  >
+                    <path
+                      d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z"
+                    ></path>
+                  </svg>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+     <div class="db_content__wrapper dashboard__wrapper">
+        <div id="w-node-d911f92a-7e13-9b08-e11f-88ea9d81f1af-b51c244b" class="db_problemscards__wrapper">
+            {{> page/dashboard/taskProgressCard}}
+
+            {{> page/dashboard/taskProgressCard}}
+
+            {{> page/dashboard/taskProgressCard}}
+        </div>
+        <div class="db_info__wrapper dashboard__info__wrapper">
+
+            {{> page/dashboard/taskList}}
+        </div>
+        <br/>
+        <div id="w-node-d911f92a-7e13-9b08-e11f-88ea9d81f21b-b51c244b" class="db_tasks__wrapper dashboard__tasks__wrapper">
+
+            {{> page/dashboard/problemCard}}
+        </div>
+      </div>
+  </div>
+</div>
