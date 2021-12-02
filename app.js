@@ -2,13 +2,19 @@
 const {
     app
 } = require('./expressConfig');
-app.use("/", require("./frontend/model/api/features"))
+
+// model, which will update the view 
+app.use("/", require("./frontend/model/api/basicCrud"))
+app.use("/", require("./frontend/model/api/playground"))
+// we'll also have the controller, which the user will use 
+
 
 app.get("/", function(req, res) {
     res.render("layouts/dashboard", {
         layout: "main"
     })
 })
+
 // app.get("/dashboard", function(req, res) {
 //     res.render("dashboard")
 // })
