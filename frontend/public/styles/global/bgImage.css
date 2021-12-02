@@ -1,0 +1,59 @@
+.bgImage {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  max-height: 1100px;
+  min-height: 200px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-position: 0px 0px;
+  background-size: auto;
+}
+#calendarPage {
+  background-image: url("https://www.dropbox.com/s/kj414zz2ssjti64/Background%201.png?raw=1");
+}
+#dashboardPage {
+  background-image: url("https://www.dropbox.com/s/ghd2ob1eb8yau9m/Background%204.png?raw=1");
+}
+
+#loginPage {
+  background-color: #f2f3f7;
+}
+
+#signupPage {
+  background-color: #f2f3f7;
+}
+
+#forgotPasswordPage {
+  background-color: #f2f3f7;
+}
+
+#resetPasswordPage {
+  background-image: url("https://www.dropbox.com/s/vc2pc2c5l4jlcfm/confetti_PNG86993%202.png?raw=1");
+}
+
+#tasksPage {
+  background-image: url("https://www.dropbox.com/s/44bmkm0mgq1sina/Background%203.png?raw=1");
+}
+
+#settingsPage {
+  background-image: url("https://www.dropbox.com/s/1g3lgi1ds3kwmwn/Background%205.png?raw=1");
+}
+
+#profilePage {
+  background-image: url("https://www.dropbox.com/s/r1ouhfytmuaj3gh/Background%202.png?raw=1");
+}
